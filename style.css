@@ -1,0 +1,256 @@
+* { box-sizing: border-box; }
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@400;500;600&display=swap');
+
+    body {
+      padding: 20px;
+      margin: 0;
+      font-family: 'Poppins', Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(-45deg, #6a11cb, #2575fc, #ff4ecd, #00f2fe);
+      background-size: 400% 400%;
+      animation: bgShift 12s ease infinite;
+      overflow-x: hidden;
+    }
+
+    @keyframes bgShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .blob {
+      position: fixed; /* Changed to fixed so they don't stretch the page on mobile scroll */
+      border-radius: 50%;
+      filter: blur(50px);
+      opacity: 0.35;
+      animation: float 10s ease-in-out infinite;
+      z-index: 1;
+    }
+
+    .blob1 { width: 200px; height: 200px; background: #ff00cc; top: 10%; left: 10%; }
+    .blob2 { width: 250px; height: 250px; background: #00f2fe; bottom: 10%; right: 10%; }
+
+    @keyframes float {
+      50% { transform: translateY(-30px) translateX(20px); }
+    }
+
+    .app {
+      position: relative;
+      z-index: 2;
+      width: calc(100vw - 40px);
+      max-width: 1400px; /* Added a max-width for ultra-wide screens */
+      animation: appGlow 4s ease-in-out infinite;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      padding: 0;
+      box-shadow: none;
+      color: white;
+    }
+
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      text-align: center;
+      margin-top: 0;
+      font-size: 2rem;
+      letter-spacing: 1px;
+    }
+
+    .input-box {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    input {
+      flex: 1;
+      padding: 22px;
+      border: none;
+      border-radius: 14px;
+      outline: none;
+      font-size: 1rem;
+    }
+
+    button {
+      border: none;
+      padding: 14px 18px;
+      border-radius: 14px;
+      cursor: pointer;
+      font-weight: bold;
+      color: white;
+      background: linear-gradient(45deg, #ff4ecd, #7b61ff);
+      transition: transform 0.2s;
+    }
+
+    button:hover { transform: scale(1.05); }
+
+    ul {
+      scrollbar-width: thin;
+      scrollbar-color: #ff4ecd rgba(255,255,255,0.12);
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      max-height: none;
+      height: calc(100vh - 140px);
+      overflow-y: auto;
+    }
+
+    ul::-webkit-scrollbar { width: 10px; }
+    ul::-webkit-scrollbar-track { background: rgba(255,255,255,0.12); border-radius: 20px; }
+    ul::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #ff4ecd, #7b61ff); border-radius: 20px; }
+    ul::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, #ff6ad5, #9b7bff); }
+
+    li {
+      backdrop-filter: blur(18px) saturate(160%);
+      -webkit-backdrop-filter: blur(18px) saturate(160%);
+      transition: transform 0.25s ease, background 0.25s ease;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px;
+      margin: 10px 0;
+      border-radius: 24px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.16), rgba(255,255,255,0.05));
+      animation: pop 0.3s ease;
+    }
+
+    @keyframes appGlow {
+      50% { box-shadow: 0 25px 55px rgba(0,0,0,0.35), 0 0 25px rgba(255,255,255,0.15); }
+    }
+
+    @keyframes pop {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    li:hover {
+      transform: translateY(-4px) scale(1.01);
+      background: rgba(255,255,255,0.24);
+    }
+
+    li.done span {
+      text-decoration: line-through;
+      opacity: 0.7;
+    }
+
+    .task-actions { display: flex; gap: 8px; }
+    .small-btn { padding: 8px 10px; font-size: 0.8rem; border-radius: 10px; }
+    .confetti-burst { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 50; }
+    .confetti-piece { position: absolute; top: -20px; width: 10px; height: 18px; border-radius: 4px; animation: confettiFall 2.8s linear forwards; }
+
+    @keyframes ringPulse {
+      0% { transform: scale(1); box-shadow: inset 0 1px 0 rgba(255,255,255,0.28), 0 10px 24px rgba(0,0,0,0.18); }
+      50% { transform: scale(1.08); box-shadow: inset 0 1px 0 rgba(255,255,255,0.35), 0 0 22px rgba(255,255,255,0.28); }
+      100% { transform: scale(1); box-shadow: inset 0 1px 0 rgba(255,255,255,0.28), 0 10px 24px rgba(0,0,0,0.18); }
+    }
+
+    .ring-animate { animation: ringPulse 0.6s ease; }
+
+    @keyframes confettiFall {
+      to { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+    }
+
+    .toggle-switch {
+      appearance: none; position: relative; width: 50px; height: 24px; border-radius: 999px; border: none; cursor: pointer; overflow: hidden; background: linear-gradient(90deg, rgba(255,255,255,0.16), rgba(123,97,255,0.22)); box-shadow: inset 0 0 10px rgba(255,255,255,0.14), 0 0 12px rgba(37,117,252,0.18); transition: all 0.35s ease;
+    }
+
+    .toggle-switch::before {
+      content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #fff, #d1d5db); box-shadow: 0 0 6px rgba(255,255,255,0.35); transition: transform 0.35s ease;
+    }
+
+    .toggle-switch::after {
+      content: '✦'; position: absolute; left: 6px; top: 2px; font-size: 10px; opacity: 0.8; color: white; transition: opacity 0.35s ease;
+    }
+
+    .toggle-switch:checked {
+      background: linear-gradient(90deg, rgba(0,242,254,0.35), rgba(123,97,255,0.42)); box-shadow: inset 0 0 10px rgba(255,255,255,0.16), 0 0 14px rgba(0,242,254,0.18);
+    }
+
+    .toggle-switch:checked::before { transform: translateX(20px); }
+    .toggle-switch:checked::after { opacity: 0.2; }
+
+    body.dark {
+      background: linear-gradient(-45deg, #0f172a, #111827, #1e1b4b, #0f172a); background-size: 400% 400%;
+    }
+
+    body.dark .blob1 { background: #7c3aed; opacity: 0.22; }
+    body.dark .blob2 { background: #06b6d4; opacity: 0.2; }
+
+    body.dark li, body.dark #taskBoard, body.dark #taskSummaryBar, body.dark #leftPanel > div, body.dark #optionsPanel {
+      background: linear-gradient(135deg, rgba(15,23,42,0.55), rgba(30,41,59,0.28)) !important; border-color: rgba(255,255,255,0.08) !important; box-shadow: 0 10px 30px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.08) !important;
+    }
+
+    /* ==============================================================
+       MOBILE OPTIMIZATION (Media Queries)
+       ============================================================== */
+    @media (max-width: 768px) {
+      body {
+        padding: 10px;
+        align-items: flex-start; /* Allows natural scrolling instead of forced centering */
+        height: auto;
+      }
+      
+      .app {
+        width: 100%;
+      }
+
+      /* Stack the grid vertically */
+      #dashboardGrid {
+        display: flex !important;
+        flex-direction: column !important;
+        height: auto !important;
+        min-height: auto !important;
+        gap: 15px !important;
+      }
+
+      /* Allow panels to flow naturally */
+      #leftPanel, #taskBoard {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        padding-right: 0 !important;
+      }
+
+      #taskBoard {
+        padding: 20px 15px !important;
+        border-left: 1px solid rgba(255,255,255,0.12) !important; /* Restore border on mobile */
+      }
+
+      /* Stack the Pending and Completed lists */
+      #taskColumns {
+        grid-template-columns: 1fr !important; 
+        gap: 20px !important;
+      }
+
+      /* Reduce list height for mobile so users can scroll past them easily */
+      ul {
+        height: auto !important;
+        max-height: 35vh; 
+      }
+
+      /* Stack inputs and make buttons full width */
+      .input-box {
+        flex-direction: column;
+      }
+      .input-box button {
+        width: 100%;
+      }
+
+      /* Adjust Filters */
+      .filters {
+        grid-template-columns: 1fr !important;
+      }
+
+      /* Stack the Summary bar items vertically */
+      #taskSummaryBar > div {
+        flex-direction: column !important;
+        gap: 15px !important;
+      }
+      #taskSummaryBar > div > div:first-child {
+        width: 100%;
+        flex-direction: row; 
+      }
+    }
